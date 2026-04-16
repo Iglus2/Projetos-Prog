@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block conteudo %}
+
+<h1 style="color: #333; text-align: center;">Registrar Novo Pedido</h1>
+<hr>
+
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">{{ form.nome.label }}</label><br>
+        {{ form.nome(style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc;") }}
+        {% if form.nome.errors %}
+            {% for erro in form.nome.errors %}
+                <span class="erro-alerta">⚠ {{ erro }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">{{ form.descricao.label }}</label><br>
+        {{ form.descricao(style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc;") }}
+        {% if form.descricao.errors %}
+            {% for erro in form.descricao.errors %}
+                <span class="erro-alerta">⚠ {{ erro }}</span>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div style="text-align: center;">
+        {{ form.submit(class_="botao", style="width: 50%; font-size: 1.1em;") }}
+    </div>
+</form>
+
+{% endblock %}
