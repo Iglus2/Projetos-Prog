@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>✏️ Editar Tarefa: {{ tarefa.nome }}</h2>
+<form method="POST" action="{{ url_for('editar_tarefa', id_tarefa=tarefa.id, origem='editar_tarefas') }}">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.nome.label }}
+        {{ form.nome() }}
+        {% for error in form.nome.errors %}<span class="error">{{ error }}</span>{% endfor %}
+    </div>
+    <div>
+        {{ form.descricao.label }}
+        {{ form.descricao(rows=4) }}
+    </div>
+    <div>
+        {{ form.prioridade.label }}
+        {{ form.prioridade() }}
+        {% for error in form.prioridade.errors %}<span class="error">{{ error }}</span>{% endfor %}
+    </div>
+    <div>
+        {{ form.prazo.label }}
+        {{ form.prazo() }}
+        {% for error in form.prazo.errors %}<span class="error">{{ error }}</span>{% endfor %}
+    </div>
+    <div style="display: flex; gap: 10px;">
+        {{ form.submit() }}
+        <a href="{{ url_for('buscar_tarefas') }}" class="btn-cancel">Cancelar</a>
+    </div>
+</form>
+{% endblock %}
