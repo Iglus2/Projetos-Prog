@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📊 Visão Geral</h2>
+
+<h3>Desenvolvedores Cadastrados</h3>
+<ul>
+    {% for dev in developers %}
+    <li><strong>{{ dev.nome }}</strong> (ID: {{ dev.id }})</li>
+    {% else %}
+    <li>Nenhum desenvolvedor cadastrado ainda.</li>
+    {% endfor %}
+</ul>
+
+<h3>Tarefas Existentes</h3>
+<ul>
+    {% for tarefa in tarefas %}
+    <li>
+        <strong>{{ tarefa.nome }}</strong><br>
+        📝 {{ tarefa.descricao or 'Sem descrição' }} |
+        ⚡ Prioridade: {{ tarefa.prioridade }}/10 |
+        📅 Entrega: {{ tarefa.prazo.strftime('%d/%m/%Y') }} |
+        👤 Dev: {{ tarefa.desenvolvedor.nome }}
+    </li>
+    {% else %}
+    <li>Nenhuma tarefa criada.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

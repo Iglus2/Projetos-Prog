@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <!-- Link para o CSS externo -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">🏠 Início</a>
+        <a href="{{ url_for('registrar_desenvolvedor') }}">👤 Cadastrar Dev</a>
+        {% if dev_logado %}
+        <a href="{{ url_for('criar_tarefa') }}">📝 Criar Tarefa</a>
+        {% endif %}
+        <a href="{{ url_for('buscar_tarefas') }}">🔍 Pesquisar/Editar</a>
+        {% if dev_logado %}
+        <span class="nav-user">Logado: {{ dev_logado.nome }}</span>
+        <a href="{{ url_for('logout') }}">🚪 Sair</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">🔐 Entrar</a>
+        {% endif %}
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+
+</html>
